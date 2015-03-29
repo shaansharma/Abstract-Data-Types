@@ -48,17 +48,6 @@ void print_list(struct llist *lst) {
 	printf("\n");
 }
 
-// void old_add_first(int n, struct llist *lst) {
-// 	assert(lst);
-
-// 	struct llnode *new = malloc(sizeof(struct llnode));
-// 	new->item = n;
-// 	lst->first = new;
-// 	(lst->len)++;
-// 	new->next = lst->first;
-// 	lst->first = new;
-// }
-
 // see list.h for documentation
 void add_first(int n, struct llist *lst) {
 	assert(lst);
@@ -66,7 +55,13 @@ void add_first(int n, struct llist *lst) {
 	struct llnode *new = malloc(sizeof(struct llnode));
 	new->item = n;
 	new->next = lst->first;
-	lst->first = new;
+	if((lst->len) == 0){
+		lst->first = new;
+		lst->last = new;
+	}else{
+		new->next = lst->first;
+		lst->first = new;
+	}
 	(lst->len)++;
 }
 
@@ -77,27 +72,27 @@ void add_last(int n, struct llist *lst) {
 	struct llnode *new = malloc(sizeof(struct llnode));
 	new->item = n;
 	new->next = NULL;
-	if(lst->len == 0){
+	if((lst->len) == 0){
 		lst->first = new;
 		lst->last = new;
 	}else{
 		lst->last->next = new;
 		lst->last = new;
 	}
-	lst->len++;
+	(lst->len)++;
 }
 
 // see list.h for documentation
 int delete_first(struct llist *lst) {
 	assert(list_length(lst) > 0);
 
-	struct llnode *temp;
-	temp = lst->first;
-	free(lst->first);
+	struct llnode *front = lst->first;
+	int firstValue = front->item;
 	lst->first = lst->first->next;
+	free(front);
 	(lst->len)--;
-	return temp->item;
 
+	return firstValue;
 }
 
 // see list.h for documentation
@@ -120,8 +115,6 @@ int get_ith(struct llist *lst, int index) {
 	return returnItem;	
 }
 
-
-// see list.h for documentation
 void insert_ith(struct llist *lst, int index, int data) {
 	assert((0 <= index) && (index <= (lst->len)));
 
@@ -138,11 +131,17 @@ void insert_ith(struct llist *lst, int index, int data) {
 	struct llnode *new = malloc(sizeof(struct llnode));
 	new->item = data;
 	new->next = cur;
+
 	if(prev == NULL){
 		lst->first = new;
 	}else{
 		prev->next = new;
 	}
+	if(cur == NULL){
+		lst->last = new;
+	}
+
+	(lst->len)++;
 }
 
 // see list.h for documentation

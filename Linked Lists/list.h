@@ -70,14 +70,14 @@ int delete_first(struct llist *lst);
 
 // get_ith(lst, index) returns the item at the ith node in lst
 //     (for example, get_ith(lst, 0) returns the first item
-// requires: index is a valid index (0 ... length-1) [assert this!]
+// requires: index is a valid index (0 ... length-1)
 // time: O(n) where n = index
 int get_ith(struct llist *lst, int index);
 
 
 // insert_ith(lst, index, data) inserts a new node with item data
 //     to lst at location index
-// requires: index is a valid new index (0 ... length) [assert this!]
+// requires: index is a valid new index (0 ... length)
 // effects: allocates a new struct llnode 
 //          adds it to lst
 //          caller must eventually free the added llnode

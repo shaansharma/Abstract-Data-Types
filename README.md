@@ -10,3 +10,6 @@ Implementation of different abstract data types written in C.
 
 ## Stack
 ![stack example](http://upload.wikimedia.org/wikipedia/commons/2/29/Data_stack.svg)
+
+## Queue
+![queue example](http://upload.wikimedia.org/wikipedia/commons/5/52/Data_Queue.svg)
